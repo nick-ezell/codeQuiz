@@ -1,18 +1,46 @@
-html {
-    margin: 0;
-    padding: 0;
-}
 body {
+    font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+    font-size: 16px;
     background: #000;
-    color: #551A8B;
+}
+.container {
+    width: 30em;
+    margin: auto;
+    padding-top: 10em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
 }
 button {
+    margin-top: 2.5em;
+    width: 10em;
+    height: 2.5em;
+    border-radius: 50px;
+    border-color: #551A8B;
+    color: #fff;
+    background: #551A8B;
+    cursor: pointer;
+    transition: all .4s;
+    text-transform: uppercase;
+}
+button:hover {
+    opacity: 0.85;
+}
+a {
+    text-decoration: none;
+}
+header {
+    font-size: 20px;
+    color: #551A8B;
 }
 #highScores {
     float: left;
-    color: #551A8B;
 }
 #timer {
     float: right;
-    color: #551A8B;
+}
+#timeLeft {
+    color: #dadada;
 }

@@ -1,5 +1,5 @@
 const startQuiz = {
-    text: "In this quiz you will test your knowledge of basic coding information.",
+    text: "In this quiz you will test your knowledge of basic coding information. You will have one minute, press the button to start.",
     button: "Start Quiz"
 }
 const questions = {
@@ -32,10 +32,12 @@ const questions = {
         correct: "Document Object Model"
     }
 }
+let highScores = [];
 let firstQ = questions.question1;
 let secondQ = questions.question2;
 let thirdQ = questions.question3;
 let fourthQ = questions.question4;
+let container = document.querySelector(".container");
 let qText = document.querySelector("#text");
 let result = document.querySelector("#result");
 let timeLeft = document.querySelector("#timeLeft");
@@ -49,4 +51,15 @@ function setTime() {
       }
     }, 1000);
   }
-  setTime();
+  window.addEventListener("load", function start(){
+    var startText = startQuiz.text;
+    var startBtn = startQuiz.button;
+    qText.textContent = startText;
+    var br = document.createElement("br");
+    qText.appendChild(br);
+    var button = document.createElement("button");
+    button.textContent = startBtn;
+    qText.appendChild(button);
+    button.addEventListener("click", setTime);
+    button.addEventListener("click", nextQ)
+  })
