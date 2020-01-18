@@ -14,8 +14,9 @@ body {
     color: #fff;
 }
 button {
+    justify-content: space-between;
     margin-top: 2.5em;
-    width: 10em;
+    width: auto;
     height: 2.5em;
     border-radius: 50px;
     border-color: #551A8B;
