@@ -51,21 +51,20 @@ let secondQ = questions[1];
 let thirdQ = questions[2];
 let fourthQ = questions[3];
 
-let highScores = [];
-
 let qText = document.querySelector("#text");
 let result = document.querySelector("#result");
 let startText = startQuiz.text;
 let startBtn = startQuiz.button;
 //Writing our start page to screen
-window.addEventListener("DOMContentLoaded", function(){qText.textContent = startText;
-let br = document.createElement("br");
-qText.appendChild(br);
+window.addEventListener("DOMContentLoaded", function () {
+qText.textContent = startText;
+  let br = document.createElement("br");
+  qText.appendChild(br);
 
-button = document.createElement("button");
-button.textContent = startBtn;
-qText.appendChild(button);
-button.addEventListener("click", startQuizAlready);
+  button = document.createElement("button");
+  button.textContent = startBtn;
+  qText.appendChild(button);
+  button.addEventListener("click", startQuizAlready);
 });
 
 //Function to navigate from start page and to start countdown
@@ -80,7 +79,7 @@ function setTime() {
     counter--;
     timeLeft.textContent = counter;
     if (counter === 0) {
-      clearInterval(timerInterval);
+      toHighScores();
     }
   }, 1000);
 }
@@ -118,6 +117,10 @@ function validateAnswer() {
     result.textContent = "Correct!"
     validateTimer();
     toHighScores();
+  }
+  else {
+    result.textContent = "Try Again";
+    validateTimer();
   }
 }
 //Function to call our validate function
@@ -174,10 +177,25 @@ function display(props) {
     }
   }
 };
-function toHighScores(){
+function toHighScores() {
   clearInterval(timerInterval)
-  let score = timeLeft;
-  qText.textContent = "";
-  qText.removeChild(button)
-  
+  let score = timeLeft.textContent;
+  let userName = document.createElement("input");
+  let br = document.createElement("br");
+  let button = document.createElement("button");
+  qText.textContent = "Please enter your name or initials.";
+  qText.appendChild(br);
+  qText.appendChild(userName);
+  qText.appendChild(button);
+  button.textContent = "Submit";
+  button.addEventListener("click", function(){
+    let highScores = [];
+    let scores = {};
+    let scoreList = document.createElement("ol");
+    scores.name = userName.value;
+    scores.score = score;
+    highScores.push(scores)
+    console.log(highScores);
+    qText.textContent = "High Scores";
+  })
 }

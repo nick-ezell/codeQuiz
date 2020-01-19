@@ -30,6 +30,11 @@ button {
 button:hover {
     opacity: 0.85;
 }
+input {
+    margin-top: 2.5em;
+    border-radius: 50px;
+    height: 2em;
+}
 a {
     text-decoration: none;
 }
