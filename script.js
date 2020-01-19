@@ -57,7 +57,7 @@ let startText = startQuiz.text;
 let startBtn = startQuiz.button;
 //Writing our start page to screen
 window.addEventListener("DOMContentLoaded", function () {
-qText.textContent = startText;
+  qText.textContent = startText;
   let br = document.createElement("br");
   qText.appendChild(br);
 
@@ -118,10 +118,6 @@ function validateAnswer() {
     validateTimer();
     toHighScores();
   }
-  else {
-    result.textContent = "Try Again";
-    validateTimer();
-  }
 }
 //Function to call our validate function
 function callValidateAnswer() {
@@ -129,54 +125,20 @@ function callValidateAnswer() {
 }
 //Function to display current question on page
 function display(props) {
-
-  if (props.question === firstQ.question) {
-    qText.textContent = props.question
-    let br = document.createElement("br");
-    qText.appendChild(br);
-    for (i = 0; i < props.choices.length; i++) {
-      button = document.createElement("button");
-      button.textContent = props.choices[i]
-      qText.appendChild(button)
-      button.addEventListener('click', callValidateAnswer)
-    }
+  qText.textContent = props.question
+  let br = document.createElement("br");
+  qText.appendChild(br);
+  for (i = 0; i < props.choices.length; i++) {
+    button = document.createElement("button");
+    button.textContent = props.choices[i]
+    qText.appendChild(button)
+    button.addEventListener('click', callValidateAnswer)
+  }
+  if (props === firstQ) {
     setTime();
   }
-
-  if (props.question === secondQ.question) {
-    qText.textContent = props.question
-    let br = document.createElement("br");
-    qText.appendChild(br);
-    for (i = 0; i < props.choices.length; i++) {
-      button = document.createElement("button");
-      button.textContent = props.choices[i]
-      qText.appendChild(button)
-      button.addEventListener('click', callValidateAnswer)
-    }
-  }
-  if (props.question === thirdQ.question) {
-    qText.textContent = props.question
-    let br = document.createElement("br");
-    qText.appendChild(br);
-    for (i = 0; i < props.choices.length; i++) {
-      button = document.createElement("button");
-      button.textContent = props.choices[i]
-      qText.appendChild(button)
-      button.addEventListener('click', callValidateAnswer)
-    }
-  }
-  if (props.question === fourthQ.question) {
-    qText.textContent = props.question
-    let br = document.createElement("br");
-    qText.appendChild(br);
-    for (i = 0; i < props.choices.length; i++) {
-      button = document.createElement("button");
-      button.textContent = props.choices[i]
-      qText.appendChild(button)
-      button.addEventListener('click', callValidateAnswer)
-    }
-  }
 };
+//Function for getting, archiving and displaying high scores
 function toHighScores() {
   clearInterval(timerInterval)
   let score = timeLeft.textContent;
@@ -188,14 +150,24 @@ function toHighScores() {
   qText.appendChild(userName);
   qText.appendChild(button);
   button.textContent = "Submit";
-  button.addEventListener("click", function(){
+  
+  button.addEventListener("click", function() {
     let highScores = [];
     let scores = {};
-    let scoreList = document.createElement("ol");
+    let scoreList = document.createElement("div");
+    let container = document.querySelector(".container");
+    scoreList.setAttribute("class", "scoreListContainer")
     scores.name = userName.value;
     scores.score = score;
     highScores.push(scores)
-    console.log(highScores);
+    container.appendChild(scoreList)
     qText.textContent = "High Scores";
+    highScores.forEach(s => {
+      let li = document.createElement("li");
+      let liTwo = document.createElement("li");
+      li.textContent = "Name: " + s.name + ", " + "Score: " + s.score;
+      scoreList.appendChild(li)
+      scoreList.appendChild(liTwo)
+    })  
   })
 }
